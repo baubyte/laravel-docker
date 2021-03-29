@@ -1,0 +1,24 @@
+version: '3.7'
+
+services:
+  web:
+    image: 'laravel-docker'
+    ports:
+      - '8000:8000'
+    volumes:
+      - "./:/app"
+    command: php artisan serve --host=0.0.0.0
+  mysql:
+    image: 'mysql:5.7'
+    environment:
+      MYSQL_ROOT_PASSWORD: admin.root
+    ports:
+      - '3306:3306'
+    volumes:
+      - ./mysql-data/schemas/:/var/lib/mysql
+  mailtrap:
+    image: 'eaudeweb/mailtrap'
+    ports:
+      - "8081:80"
+volumes:
+  mysql-data:
